@@ -1,0 +1,81 @@
+{% extends 'cuba/base.html' %}
+
+
+{% block content %}
+
+<div>
+    <div class="col1">
+        <div id="main" class="content">
+       <table class="table">
+    <tr>
+
+        <th>{{ blog.title }}</th>
+    </tr>
+
+    <tr>
+      {% if blog.image %}
+        <td><img src="{{ blog.image.url }}"/></td>
+       {% endif %}
+    </tr>
+     <tr>
+      {% if blog.image2 %}
+        <td><img src="{{ blog.image2.url }}"/></td>
+       {% endif %}
+    </tr>
+    <tr>
+     <td>{{ blog.text|linebreaksbr | urlize }}</td>
+    </tr>
+
+    <tr>
+
+        <td>Category: {{ blog.category }}</td>
+
+    </tr>
+    <tr>
+     <td> {{ blog.date }} </td>
+    </tr>
+       </table>
+
+      {% for comment in blog.comment_set.all %}
+
+         <b>{{ comment.name }}</b><br>
+ {{ comment.comment_text | linebreaksbr }} <br>
+
+  {% endfor %}
+
+     <br>
+         <div class = "form">
+           <h5>Comment Form</h5>
+    <form action="" method="POST">
+    {% for field in form %}
+    <div class="form-group">
+        {{ field.label_tag }}
+        <br>
+        {{ field }}
+        {{ field.errors }}
+    </div>
+    {% endfor %}
+     {% csrf_token %}
+  <button type="submit" class="button">SUBMIT</button>
+
+
+   </form>
+
+</div>
+     <a href="{% url 'cuba:blog' %}"}>TOP</a>
+    </div>
+    </div>
+ <div class="col2">
+       <ul>
+           <h5>Category</h5>
+        {% for category in category_list %}
+           <li><a href="{% url 'cuba:category' category.pk %}"> {{ category }}</a></li>
+
+           {% endfor %}
+     </ul>
+
+ </div>
+
+</div>
+
+{% endblock %}

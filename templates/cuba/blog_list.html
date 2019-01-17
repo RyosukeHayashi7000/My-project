@@ -1,0 +1,84 @@
+{% extends 'cuba/base.html' %}
+
+
+{% block content %}
+
+<div>
+    <div class="col1">
+        <div id="main" class="content">
+       {% for blog in blog_list %}
+
+       <table class="table">
+    <tr>
+
+        <th>{{ blog.title }}</th>
+    </tr>
+
+    <tr>
+      {% if blog.image %}
+        <td><img src="{{ blog.image.url }}"/></td>
+       {% endif %}
+    </tr>
+     <tr>
+      {% if blog.image2 %}
+        <td><img src="{{ blog.image2.url }}"/></td>
+       {% endif %}
+    </tr>
+    <tr>
+     <td>{{ blog.text|linebreaksbr | urlize }}</td>
+    </tr>
+
+    <tr>
+
+        <td>Category: {{ blog.category }}</td>
+
+    </tr>
+    <tr>
+     <td> {{ blog.date }} </td>
+    </tr>
+    <tr>
+     <td><br>
+{% for comment in blog.comment_set.all %}
+
+         <b>{{ comment.name }}</b><br>
+ {{ comment.comment_text | linebreaksbr }} <br>
+
+  {% endfor %}
+
+
+     </td>
+    </tr>
+
+           <tr>
+     <td> <a href="{% url 'cuba:detail' blog.pk %}">Comment</a></td>
+    </tr>
+  </table>
+{% endfor %}
+
+
+
+        </div>
+    </div>
+ <div class="col2">
+       <ul>
+           <h5>Category</h5>
+           <li><a href="{% url 'cuba:blog' %}">All</a></li>
+        {% for category in category_list %}
+           <li><a href="{% url 'cuba:category' category.pk %}"> {{ category }}</a></li>
+
+           {% endfor %}
+     </ul>
+ </div>
+<div class="page">
+{% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number}}">Previous</a>
+{% endif %}
+{% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number}}">Next</a>
+{% endif %}
+
+</div>
+</div>
+
+
+{% endblock %}

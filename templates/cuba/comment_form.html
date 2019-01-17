@@ -1,0 +1,41 @@
+{% extends 'cuba/base.html' %}
+
+
+{% block content %}
+
+<div>
+    <div class="col1">
+        <div id="main" class="content">
+       <div class = "form">
+           <h5>Comment Form</h5>
+    <form action="" method="POST">
+    {% for field in form %}
+    <div class="form-group">
+        {{ field.label_tag }}
+        <br>
+        {{ field }}
+        {{ field.errors }}
+    </div>
+    {% endfor %}
+     {% csrf_token %}
+  <button type="submit" class="button">SUBMIT</button>
+
+
+   </form>
+
+</div>
+    </div>
+    </div>
+ <div class="col2">
+       <ul>
+           <h5>Category</h5>
+        {% for category in category_list %}
+           <li><a href="{% url 'cuba:category' category.pk %}"> {{ category }}</a></li>
+
+           {% endfor %}
+     </ul>
+ </div>
+
+</div>
+
+{% endblock %}

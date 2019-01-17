@@ -1,0 +1,35 @@
+{% extends 'cuba/base.html' %}
+
+{% block content %}
+
+  <div id="banner">
+    <div class="content">
+      <h1>Cuba is culture, nature, history, magic and traditions.</h1>
+    </div>
+  </div>
+<div id="main" class="content">
+    <h3>作家ヘミングウェイは、キューバを第二の故郷として愛し、フィンカ・ビヒアの家で、9千冊の本、57匹の猫、4頭の犬、そして2人の妻たちとともに、22年間すごした。
+      <br>
+        <br>
+        そして『誰がために鐘は鳴る』『老人と海』『海流のなかの島々』などの作品がここで生まれた。</h3>
+
+    {% for post in post_list %}
+    <h4>{{ post.post_title }}</h4>
+    <img src="{{ post.post_image.url }}">
+    <p>{{ post.post_text }}
+    <p>
+
+    {% endfor %}
+
+
+
+  <div class="video-container">
+　　　　<iframe src="https://player.vimeo.com/video/73117564?portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+　　　　<p><a href="https://vimeo.com/73117564">Cuba - Lost in Time</a> from <a href="https://vimeo.com/paulwex">Paul Wex</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+  </div>
+</div>
+
+
+
+   </div>
+{% endblock %}
